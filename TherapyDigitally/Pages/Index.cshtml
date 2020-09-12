@@ -5,6 +5,24 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="text-primary" style="margin-top:3%">Therapy Digitally</h1>
+    <h6 style="margin-top:3%" class="text-muted"><i>Your Online Personalized Therapy, helping you with any issue you have in a quick dynamic matter!</i></h6>
 </div>
+<div id="carousel" class="carousel slide" data-ride="carousel" style="margin-top:10%">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img class="d-block w-100" src="~/images/carosuel/image1.png" alt="First slide">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="~/images/carosuel/image2.png" alt="Second slide">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="~/images/carosuel/image3.png" alt="Third slide">
+        </div>
+    </div>
+</div>
+<script>
+    $('.carousel').carousel({
+        interval: 7500
+    })
+</script>
