@@ -4,5 +4,28 @@
     ViewData["Title"] = "chat";
 }
 <div class="text-center">
-    <h1>Chat With A Bot To Generate a Curated Activity To Help</h1>
+    <h1>Chat With A Bot To Generate a Curated Activity</h1>
 </div>
+<div id="chatHub">
+    <div class="card border-primary" style="width:90%;height:350px;margin-top:5%;margin-left:5%">
+        <div class="card-body">
+            <h5 class="card-title text-center">Chat</h5>
+            <hr />
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item text-left">
+                    <h6 class="text-info">Marcus</h6>
+                    Hey there, how are you doing?
+                </li>
+                <li class="list-group-item text-right">
+                    <h6 class="text-info">@Model.User.Identity.Name.Split('@')[0]</h6>
+                    I'm good
+                </li>
+            </ul>
+        </div>
+        <div class="input-group">
+            <input type="search" id="message" class="form-control" placeholder="Your Message" style="width:70%;margin-bottom:5px;margin-left:5px"/>
+            <button class="btn btn-primary form-control" id="send" onclick="userMessage('@Model.newTicket.id')" style="height:45px;margin-right:5px"><i class="fas fa-caret-up"></i></button>
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">

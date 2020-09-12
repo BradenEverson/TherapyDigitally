@@ -13,10 +13,11 @@ namespace Therapy.Core
         public DateTime prescriptionDate { get; }
         public string diagnosis { get; set; }
         public string id { get; }
-        public Ticket()
+        public Ticket(string userId)
         {
             this.prescriptionDate = DateTime.Now;
             this.id = Guid.NewGuid().ToString().Split('-')[0];
+            this.userId = userId;
         }
         public void generateActivity()
         {
