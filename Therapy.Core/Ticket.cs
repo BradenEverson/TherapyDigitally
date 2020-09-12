@@ -18,6 +18,7 @@ namespace Therapy.Core
             this.prescriptionDate = DateTime.Now;
             this.id = Guid.NewGuid().ToString().Split('-')[0];
             this.userId = userId;
+            this.details = new List<string>();
         }
         public void generateActivity()
         {

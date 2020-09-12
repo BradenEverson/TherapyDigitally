@@ -12,5 +12,6 @@ namespace Therapy.Database
         public Ticket update(Ticket updatedTicket);
         public List<Ticket> getAllTicketsForUser(string id);
         public List<Activity> getAllActivitiesForUser(string id);
+        Ticket getById(string ticketId);
     }
 }

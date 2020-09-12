@@ -39,6 +39,11 @@ namespace Therapy.Database
             return userTickets;
         }
 
+        public Ticket getById(string ticketId)
+        {
+            return tickets.FirstOrDefault(r => r.id == ticketId);
+        }
+
         public Ticket update(Ticket updatedTicket)
         {
             Ticket oldTicket = tickets.FirstOrDefault(r => r.id == updatedTicket.id);

@@ -55,7 +55,7 @@ namespace TherapyDigitally
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
-                endpoints.MapHub<TherapyHub>("TherapyHub.cs");
+                endpoints.MapHub<TherapyHub>("TherapyHub");
             });
         }
     }
