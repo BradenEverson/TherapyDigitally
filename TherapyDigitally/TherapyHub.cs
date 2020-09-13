@@ -11,21 +11,10 @@ namespace TherapyDigitally
 {
     public class TherapyHub : Hub
     {
-        private List<String> botMemory;
         private readonly TherapyDigitallyContext db;
         private readonly ITherapyData tickets;
-        private List<String> smallDialogue = new List<string>()
-        {
-            "Have you been feeling stressed lately?",
-            "Have you been having trouble sleeping?",
-            "Have you had trouble focusing on things?",
-            "Do you feel overworked a lot lately?",
-            "Have your symptoms gotten worse lately?",
-            "Have you felt very lazy lately?"
-        };
         public TherapyHub(ITherapyData tickets, TherapyDigitallyContext db)
         {
-            botMemory = new List<string>();
             this.tickets = tickets;
             this.db = db;
         }
@@ -44,25 +33,26 @@ namespace TherapyDigitally
                 botMessage = "What made you feel " + message + "?";
                 currentTicket.overallMood = message;
             }
-            else if(message.ToLowerInvariant() != "no")
+            else if(message.ToLowerInvariant() != "stop")
             {
-                botMessage = smallDialogue[StaticRandom.Instance.Next(0, smallDialogue.Count() - 1)];
+                botMessage = tickets.GetRandom();
             }
             else
             {
                 //If user wants to leave
                 botMessage = "Okay, feel free to continue to the activity created by this information!";
+                tickets.DeleteAllInBotMemory();
                 currentTicket.generateActivity();
             }
             if (message.ToLowerInvariant().Contains("yes"))
             {
-                currentTicket.assets.Add(botMemory[botMemory.Count() - 1], true);
+                currentTicket.assets.Add(tickets.getRecent(), true);
             }else if (message.ToLowerInvariant().Contains("no"))
             {
-                currentTicket.assets.Add(botMemory[botMemory.Count() - 1], false);
+                currentTicket.assets.Add(tickets.getRecent(), false);
             }
-            botMemory.Add(message);
-            botMemory.Add(botMessage);
+            tickets.addToBotMemory(message);
+            tickets.addToBotMemory(botMessage);
             tickets.update(currentTicket);
             await Clients.Caller.SendAsync("BotMessage", botMessage);
         }

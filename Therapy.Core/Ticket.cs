@@ -26,20 +26,7 @@ namespace Therapy.Core
         }
         public void generateActivity()
         {
-            Dictionary<string, int> everyDiagnosis = new Dictionary<string, int>();
-            foreach (string detail in details)
-            {
-                //String diagnosis = {Scrape specific detail from a health database to see which illness it most likely is}
-                //if(everyDiagnosis.containsKey(diagnosis){
-                    //everyDiagnosis[diagnosis] = everyDiagnosis[diagnosis] + 1;
-                //}else{
-                    //everyDiagnosis.add(diagnosis,1);
-                //}
-            }
-            //Cross reference every detail to see which illness is the most common in the list. Then set the diagnosis to that.
-            int max = everyDiagnosis.Values.Max();
-            this.diagnosis = everyDiagnosis.FirstOrDefault(r => r.Value == max).Key;
-            this.prescribedActivity = new Activity(this.diagnosis, this.userId, this.id);
+            this.prescribedActivity = new Activity(this.assets, this.userId, this.id);
         }
     }
 }

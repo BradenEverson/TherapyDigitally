@@ -15,7 +15,7 @@
                 <ul class="list-group list-group-flush" id="chat" style="overflow-x:hidden;overflow-y:auto;height:400px">
                     <li class="list-group-item text-left">
                         <h6 class="text-info">Marcus</h6>
-                        Hey there! How are you feeling today?
+                        Hey there! How are you feeling today? (Remember: You can end our session at any time by typing 'stop' in the chat)
                     </li>
                 </ul>
             </div>
@@ -23,6 +23,25 @@
         <div class="input-group">
             <input type="search" id="message" class="form-control" placeholder="Your Message" style="width:70%;margin-bottom:5px;margin-left:5px"/>
             <button class="btn btn-primary form-control" id="send" onclick="userMessage('@Model.newTicket.id','@Model.currentUser.Email.Split('@')[0]')" style="height:45px;margin-right:5px"><i class="fas fa-caret-up"></i></button>
+        </div>
+    </div>
+</div>
+<div class="modal fade border-primary" id="alert" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Finished Chat!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="body">
+                <p>You finished your chat! Click <a class="text-info">continue</a> to move on to the activity!</p>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary" asp-page="./activity" asp-route-ticketId="@Model.newTicket.id">Continue</a>
+                <button type="button" class="btn border-secondary" data-dismiss="modal">Close</button>
+            </div>
         </div>
     </div>
 </div>

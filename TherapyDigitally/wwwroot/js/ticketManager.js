@@ -13,6 +13,7 @@ function userMessage(ticketId, name) {
     connection.invoke("UserMessage", ticketId, document.getElementById("message").value).catch(function (err) {
         return console.error(err);
     });
+    document.getElementById("message").value = "";
 }
 connection.on("BotMessage", function (botmessage) {
     var chatList = document.getElementById("chat");
@@ -20,4 +21,7 @@ connection.on("BotMessage", function (botmessage) {
     newMessage.innerHTML = "<h6 class='text-info'>Marcus</h6>" + botmessage;
     newMessage.setAttribute("class", "list-group-item text-left");
     chatList.appendChild(newMessage);
+    if (botmessage == "Okay, feel free to continue to the activity created by this information!") {
+        $("#alert").modal("show");
+    }
 });
