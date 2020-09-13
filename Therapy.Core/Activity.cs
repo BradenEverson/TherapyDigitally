@@ -47,6 +47,7 @@ namespace Therapy.Core
         public string id { get; }
         public Activity(Dictionary<string,bool> assets, string userId, string ticketId)
         {
+            this.nestedDirections = new List<List<string>>();
             this.ticketId = ticketId;
             this.assets = assets;
             this.userId = userId;

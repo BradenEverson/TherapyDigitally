@@ -3,6 +3,60 @@
 @{
     ViewData["Title"] = "activity";
 }
+    <div class="text-center">
+        <h1>Your New Activity</h1>
+    </div>
+    <div class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            @for (int item = 0; item < Model.currentTicket.prescribedActivity.nestedDirections.Count(); item++)
+            {
+                @if (item == 0)
+                {
 
-<h1>activity</h1>
+                    <div class="carousel-item active">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">@Model.currentTicket.prescribedActivity.nestedDirections[item][0]</h5>
+                                @Model.currentTicket.prescribedActivity.nestedDirections[item].Remove(Model.currentTicket.prescribedActivity.nestedDirections[item][0]);
+                                <hr />
+                                <ul class="list-group list-group-flush">
+                                    @foreach (var direction in @Model.currentTicket.prescribedActivity.nestedDirections[item])
+                                    {
+                                        <li class="list-group-item">@direction</li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="carousel-item ">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">@Model.currentTicket.prescribedActivity.nestedDirections[item][0]</h5>
+                                @Model.currentTicket.prescribedActivity.nestedDirections[item].Remove(Model.currentTicket.prescribedActivity.nestedDirections[item][0]);
+                                <hr />
+                                <ul class="list-group list-group-flush">
+                                    @foreach (var direction in @Model.currentTicket.prescribedActivity.nestedDirections[item])
+                                    {
+                                        <li class="list-group-item">@direction</li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
 
+                }
+            }
+            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="false"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="false"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+            
+</div>

@@ -25,6 +25,8 @@ namespace TherapyDigitally
         {
             currentTicket = tickets.getById(ticketId);
             currentUser = db.Users.FirstOrDefault(r => r.Email == User.Identity.Name);
+            currentTicket.generateActivity();
+            tickets.update(currentTicket);
         }
     }
 }
