@@ -53,6 +53,8 @@ namespace Therapy.Database
                 oldTicket.userId = updatedTicket.userId;
                 oldTicket.details = updatedTicket.details;
                 oldTicket.diagnosis = updatedTicket.diagnosis;
+                oldTicket.assets = updatedTicket.assets;
+                oldTicket.overallMood = updatedTicket.overallMood;
             }
             return oldTicket;
         }

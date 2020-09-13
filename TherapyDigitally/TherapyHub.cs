@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using Therapy.Core;
 using Therapy.Database;
@@ -12,18 +11,21 @@ namespace TherapyDigitally
 {
     public class TherapyHub : Hub
     {
+        private List<String> botMemory;
         private readonly TherapyDigitallyContext db;
         private readonly ITherapyData tickets;
         private List<String> smallDialogue = new List<string>()
         {
-            "Oh alright, noted, should I continue?",
-            "Sounds good, I'll write that down. Anything else?",
-            "Okay. Anything else?",
-            "Thankks for sharing! Anything else?",
-            "Thankks for sharing! Anything else you want to share with me?"
+            "Have you been feeling stressed lately?",
+            "Have you been having trouble sleeping?",
+            "Have you had trouble focusing on things?",
+            "Do you feel overworked a lot lately?",
+            "Have your symptoms gotten worse lately?",
+            "Have you felt very lazy lately?"
         };
         public TherapyHub(ITherapyData tickets, TherapyDigitallyContext db)
         {
+            botMemory = new List<string>();
             this.tickets = tickets;
             this.db = db;
         }
@@ -40,6 +42,7 @@ namespace TherapyDigitally
             if(currentTicket.details.Count <= 1)
             {
                 botMessage = "What made you feel " + message + "?";
+                currentTicket.overallMood = message;
             }
             else if(message.ToLowerInvariant() != "no")
             {
@@ -51,23 +54,18 @@ namespace TherapyDigitally
                 botMessage = "Okay, feel free to continue to the activity created by this information!";
                 currentTicket.generateActivity();
             }
+            if (message.ToLowerInvariant().Contains("yes"))
+            {
+                currentTicket.assets.Add(botMemory[botMemory.Count() - 1], true);
+            }else if (message.ToLowerInvariant().Contains("no"))
+            {
+                currentTicket.assets.Add(botMemory[botMemory.Count() - 1], false);
+            }
+            botMemory.Add(message);
+            botMemory.Add(botMessage);
             tickets.update(currentTicket);
             await Clients.Caller.SendAsync("BotMessage", botMessage);
         }
-    }
-    public class StaticRandom
-    {
-        private static int seed;
-
-        private static readonly ThreadLocal<Random> threadLocal = new ThreadLocal<Random>
-            (() => new Random(Interlocked.Increment(ref seed)));
-
-        static StaticRandom()
-        {
-            seed = Environment.TickCount;
-        }
-
-        public static Random Instance { get { return threadLocal.Value; } }
     }
 }
 

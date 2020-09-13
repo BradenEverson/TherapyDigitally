@@ -7,6 +7,9 @@ namespace Therapy.Core
 {
     public class Ticket
     {
+        public string overallMood;
+
+        public Dictionary<string,bool> assets { get; set; }
         public Activity prescribedActivity { get; set; }
         public string userId { get; set; }
         public List<string> details { get; set; }
@@ -15,6 +18,7 @@ namespace Therapy.Core
         public string id { get; }
         public Ticket(string userId)
         {
+            this.assets = new Dictionary<string, bool>();
             this.prescriptionDate = DateTime.Now;
             this.id = Guid.NewGuid().ToString().Split('-')[0];
             this.userId = userId;
